@@ -1,3 +1,4 @@
+import ExibeDados from './ExibeDados'
 import CapturaDados from './CapturaDados'
 import { useState } from 'react'
 
@@ -6,24 +7,35 @@ const App = () => {
   const [valorInicial, setValorInicial] = useState(null)
   const [aporteMensal, setAporteMensal] = useState(null)
   const [taxaJuros, setTaxaJuros] = useState(null)
-  const [periodoMeses, setPeriodo] = useState(null)
+  const [periodoMeses, setPeriodo] = useState(0)
+  const [valorFinal, setValorFinal] = useState(0)
+  const [totalInvestido, setTotalInvestido] = useState(0)
+  const [totalJuros, setTotalJuros] = useState(0)
+  const [rentabilidade, setRentabilidade] = useState(0)
 
   const calcularValor = () => {
 
     const valor = Number(valorInicial)
     const aporte = Number(aporteMensal)
-    const juros = Number(taxaJuros)
+    const taxa = Number(taxaJuros)/100
     const periodo = Number(periodoMeses)
 
-    if(valor && aporte && juros && periodo)
+    if(valor && aporte && taxa && periodo)
     {
-      if(valor < 0 || aporte < 0 || juros < 0 || periodo < 0)
+      if(valor < 0 || aporte < 0 || taxa < 0 || periodo < 0)
       {
         alert("Todos os valores devem ser positivos!")
       }
       else
       {
-
+        const final = (valor*((1+taxa)**periodo))+(aporte*((((1+taxa)**periodo)-1)/taxa))
+        setValorFinal(final)
+        const investido = valor + (aporte*periodo)
+        setTotalInvestido(investido)
+        const juros = final - investido
+        setTotalJuros(juros)
+        const lucro = (juros/investido)*100
+        setRentabilidade(lucro)
       }
     }
     else
@@ -49,7 +61,13 @@ const App = () => {
           setPeriodo={setPeriodo}
           calcularValor={calcularValor}
         />
-        
+        <ExibeDados
+          valorFinal={valorFinal}
+          totalInvestido={totalInvestido}
+          totalJuros={totalJuros}
+          numeroAportes={periodoMeses}
+          rentabilidade={rentabilidade}
+        />
       </div>
     </div>
   )
