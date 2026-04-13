@@ -8,7 +8,7 @@ const CapturaDados = (props) => {
             <div className="row justify-content-center">
 
                 <div className="col-md-6 col-sm-12">
-                    <p>Valor inicial (R$)</p>
+                    <h5>Valor inicial (R$)</h5>
                     <input 
                         type="text"
                         placeholder="Ex: 1000.00" 
@@ -18,7 +18,7 @@ const CapturaDados = (props) => {
                 </div>
 
                 <div className="col-md-6 col-sm-12">
-                    <p>Aporte mensal (R$)</p>
+                    <h5>Aporte mensal (R$)</h5>
                     <input 
                         type="text"
                         placeholder="Ex: 300.00" 
@@ -28,7 +28,7 @@ const CapturaDados = (props) => {
                 </div>
 
                 <div className="col-md-6 col-sm-12">
-                    <p>Taxa de juros (% ao mês)</p>
+                    <h5>Taxa de juros (% ao mês)</h5>
                     <input 
                         type="text"
                         placeholder="Ex: 0.85" 
@@ -38,7 +38,7 @@ const CapturaDados = (props) => {
                 </div>
 
                 <div className="col-md-6 col-sm-12">
-                    <p>Período (meses)</p>
+                    <h5>Período (meses)</h5>
                     <input 
                         type="text"
                         placeholder="Ex: 24" 
