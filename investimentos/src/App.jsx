@@ -1,3 +1,4 @@
+import ExibeHistorico from './ExibeHistorico'
 import ExibeDados from './ExibeDados'
 import CapturaDados from './CapturaDados'
 import { useState } from 'react'
@@ -12,6 +13,15 @@ const App = () => {
   const [totalInvestido, setTotalInvestido] = useState(0)
   const [totalJuros, setTotalJuros] = useState(0)
   const [rentabilidade, setRentabilidade] = useState(0)
+  const [contador, setContador] = useState(0)
+  const [historico, setHistorico] = useState([
+    {data: null, valor: null},
+    {data: null, valor: null},
+    {data: null, valor: null},
+    {data: null, valor: null},
+    {data: null, valor: null},
+    {data: null, valor: null}
+  ])
 
   const calcularValor = () => {
 
@@ -28,6 +38,7 @@ const App = () => {
       }
       else
       {
+        const dataAtual = new Date().toLocaleString()
         const final = (valor*((1+taxa)**periodo))+(aporte*((((1+taxa)**periodo)-1)/taxa))
         setValorFinal(final)
         const investido = valor + (aporte*periodo)
@@ -36,6 +47,13 @@ const App = () => {
         setTotalJuros(juros)
         const lucro = (juros/investido)*100
         setRentabilidade(lucro)
+        for(let i = 5; i > 0; i--)
+        {
+          historico[i] = historico[i-1]
+        }
+        historico[0] = {data: dataAtual, valor: final}
+        setHistorico(historico)
+        setContador(contador+1)
       }
     }
     else
@@ -67,6 +85,10 @@ const App = () => {
           totalJuros={totalJuros}
           numeroAportes={periodoMeses}
           rentabilidade={rentabilidade}
+        />
+        <ExibeHistorico
+          contador={contador}
+          historico={historico}
         />
       </div>
     </div>

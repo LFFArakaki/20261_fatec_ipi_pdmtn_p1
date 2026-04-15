@@ -6,7 +6,7 @@ const ExibeDados = (props) => {
             <div className="row mt-3">
                 <div className="col-12">
                     <p>Valor final acumulado</p>
-                    <h1 class="text-success">R$ {props.valorFinal}</h1>
+                    <h1 className="text-success">R$ {props.valorFinal}</h1>
                 </div>
             </div>
             <div className="row mt-5">
@@ -24,7 +24,7 @@ const ExibeDados = (props) => {
                 </div>
                 <div className="col-md-6 col-sm-12">
                     <p>Rentabilidade</p>
-                    <h3>+{props.rentabilidade}%</h3>
+                    <h3 className="text-success">+{props.rentabilidade}%</h3>
                 </div>
             </div>
         </div>
