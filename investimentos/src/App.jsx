@@ -19,9 +19,9 @@ const App = () => {
     {data: null, valor: null},
     {data: null, valor: null},
     {data: null, valor: null},
-    {data: null, valor: null},
     {data: null, valor: null}
   ])
+  const [numeroAportes, setNumeroAportes] = useState(0)
 
   const calcularValor = () => {
 
@@ -39,21 +39,25 @@ const App = () => {
       else
       {
         const dataAtual = new Date().toLocaleString()
-        const final = (valor*((1+taxa)**periodo))+(aporte*((((1+taxa)**periodo)-1)/taxa))
+        let final = (valor*((1+taxa)**periodo))+(aporte*((((1+taxa)**periodo)-1)/taxa))
+        final = Math.round(final*100)/100
         setValorFinal(final)
-        const investido = valor + (aporte*periodo)
+        let investido = valor + (aporte*periodo)
         setTotalInvestido(investido)
-        const juros = final - investido
+        let juros = final - investido
+        juros = Math.round(juros*100)/100
         setTotalJuros(juros)
-        const lucro = (juros/investido)*100
+        let lucro = (juros/investido)*100
+        lucro = Math.round(lucro*100)/100
         setRentabilidade(lucro)
-        for(let i = 5; i > 0; i--)
+        for(let i = 4; i > 0; i--)
         {
           historico[i] = historico[i-1]
         }
         historico[0] = {data: dataAtual, valor: final}
         setHistorico(historico)
         setContador(contador+1)
+        setNumeroAportes(periodo)
       }
     }
     else
@@ -83,7 +87,7 @@ const App = () => {
           valorFinal={valorFinal}
           totalInvestido={totalInvestido}
           totalJuros={totalJuros}
-          numeroAportes={periodoMeses}
+          numeroAportes={numeroAportes}
           rentabilidade={rentabilidade}
         />
         <ExibeHistorico
